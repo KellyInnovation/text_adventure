@@ -3,7 +3,7 @@ from sys import exit
 class Game():
 	"""docstring for Game"""
 	def __init__(self):
-		self.specialty_items = []
+		self.score = 0
 		
 	def leave(self):
 		print("The animals are sad.  Please leave Pet Place.")
@@ -28,8 +28,6 @@ class Game():
 		else:
 			print("Yes or No?")
 			self.start()
-
-	score = 0
 
 	def winning(self):
 		if score = 3:

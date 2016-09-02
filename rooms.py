@@ -1,7 +1,7 @@
 import random
 
 #import game
-from game import get_menu_selection, display_selection_error
+from game import get_menu_selection, display_selection_error, score
 
 class Rooms():
 	"""docstring for Rooms"""
@@ -119,13 +119,63 @@ class Rooms():
 			menu_selection = get_menu_selection(self.available_specialty_item())
 
 			if menu_selection == "0":
+				print("Your special items will be saved for use in different rooms.")
 				break
-			elif 
+		
+			elif menu_selection == "1":
+				if self.animal_room == "golden_retriever_room":
+					print("The ball was a great idea for the golden retriever.")
+					print("Great job!  The puppy really loved playing with you")
+					score += 1
+					self.inventory.remove("Red Ball")
+					self.animal_room = None
+					break
+				elif self.animal_room == "peacock_room":
+					print("The peacock gets angry and pops the ball.")
+					print("He really wanted food.")
+					leave()
+				elif self.animal_room == "bunny_room":
+					print("The ball bounces and smushes the poor bunny.")
+					leave()
+		
+			elif menu_selection == "2":
+				if self.animal_room == "peacock_room":
+					print("Great Job! The peacock was very hungry.")
+					print("You watch as the peacock spreads his feathers wide.")
+					score += 1
+					self.inventory.remove("Bird Seed")
+					self.animal_room = None
+					break
+				elif self.animal_room == "golden_retriever_room":
+					print("The golden retriever breathes in the bird seed.")
+					print("She can't stop sneezing.")
+					leave()
+				elif self.animal_room == "bunny_room":
+					print("The bunny thinks the seed is litter.")
+					print("The bunny is even more of a mess.")
+					leave()
+		
+			elif menu_selection == "3":
+				if self.animal_room == "bunny_room":
+					print("That bunny sure was a mess.")
+					print("Great job! You brushed the bunny.")
+					print("The bunny sniffs you and likes the petting.")
+					score += 1
+					self.inventory.remove("Small Brush")
+					self.animal_room = None
+					break
+				elif self.animal_room == "golden_retriever_room":
+					print("The golden retriever eats the brush.")
+					print("She doesn't feel very good.")
+					leave()
+				elif self.animal_room == "peacock_room":
+					print("You pulled out one of his feathers!")
+					print("The peacock is mad and squawking!")
+					leave()
 
+			else:
+				display_selection_error(menu_selection)
 
-			4:"Brush"}),
-		{2:"Bird Seed"}),
-		{1:"Red Ball"}),
 
 
 	def animal_room_choice(self):
@@ -148,9 +198,6 @@ class Rooms():
 		print("This playful puppy is so excited to see you.")
 
 		self.animal_room_choice(golden_retriever_room)
-
-		if specialty_item = red_ball:
-			print("Great job!  The puppy really loved playing with you")
 
 
 	def peacock_room(self):
