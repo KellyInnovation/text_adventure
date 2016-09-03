@@ -1,7 +1,7 @@
 import random
 
 #import game
-from game import get_menu_selection, display_selection_error, score
+from game import get_menu_selection, display_selection_error
 
 class Rooms():
 	"""docstring for Rooms"""
@@ -25,12 +25,11 @@ class Rooms():
 		"0: Return to Lobby",
 	)
 
-
-
 	def __init__(self):
 		self.inventory = []
 		self.specialty_room = None
 		self.animal_room = None
+		self.happy_animal = []
 
 
 	def earn_item(self):
@@ -126,7 +125,7 @@ class Rooms():
 				if self.animal_room == "golden_retriever_room":
 					print("The ball was a great idea for the golden retriever.")
 					print("Great job!  The puppy really loved playing with you")
-					score += 1
+					self.happy_animal.append("Golden Retriever")
 					self.inventory.remove("Red Ball")
 					self.animal_room = None
 					break
@@ -142,7 +141,7 @@ class Rooms():
 				if self.animal_room == "peacock_room":
 					print("Great Job! The peacock was very hungry.")
 					print("You watch as the peacock spreads his feathers wide.")
-					score += 1
+					self.happy_animal.append("Peacock")
 					self.inventory.remove("Bird Seed")
 					self.animal_room = None
 					break
@@ -160,7 +159,7 @@ class Rooms():
 					print("That bunny sure was a mess.")
 					print("Great job! You brushed the bunny.")
 					print("The bunny sniffs you and likes the petting.")
-					score += 1
+					self.happy_animal.append("Bunny")
 					self.inventory.remove("Small Brush")
 					self.animal_room = None
 					break
@@ -175,8 +174,6 @@ class Rooms():
 
 			else:
 				display_selection_error(menu_selection)
-
-
 
 	def animal_room_choice(self):
 		print("What would you like to do?")
@@ -198,7 +195,6 @@ class Rooms():
 		print("This playful puppy is so excited to see you.")
 
 		self.animal_room_choice(golden_retriever_room)
-
 
 	def peacock_room(self):
 		self.animal_room = "peacock_room"

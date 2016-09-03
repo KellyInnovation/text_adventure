@@ -1,9 +1,11 @@
 from sys import exit
 
+from rooms import happy_animal
+
 class Game():
 	"""docstring for Game"""
 	def __init__(self):
-		self.score = 0
+		self.name = name
 		
 	def leave(self):
 		print("The animals are sad.  Please leave Pet Place.")
@@ -30,11 +32,36 @@ class Game():
 			self.start()
 
 	def winning(self):
-		if score = 3:
+		if happy_animal = "Golden Retriever" and "Peacock" and "Bunny":
 			print("Congratulations!  You won the game.")
 			print("All of the animals are so happy!")
 			print("""
+			**********************************************************************
 
+											   ______
+					                    ~——----  ___ --———-~
+							          /	   ~——---   ---—~    \
+							        /	 /    ~—------~    \   \
+							      /	   /    /   ~---~   \    \   \
+							    /	 /    /   /       \   \    \   \
+							   |    |  	 |   |         |   |    |   |
+							   |    |    |   |         |   |    |   |
+							   |    |    |   |         |   |    |   |
+
+
+
+							   /\      /\
+					          /  \    /  \
+					         |    |  |    |
+					          \   /___\   /
+					          /           \
+					         |    O   O   |
+					          \     ?    /             
+					            \   ~   /   ____——_____
+					              |     \__/            \
+ 				                 /                        \
+				                |			          	   |O
+				                |__________________________|   
 
 			""")
 
