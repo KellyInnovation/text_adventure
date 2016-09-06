@@ -71,7 +71,7 @@ class Rooms():
 				display_selection_error(menu_selection)
 	
 	def toy_room(self):
-		self.specialty_room == "toy_room"
+		self.specialty_room = "toy_room"
 
 		print("Welcome to the Toy Store!")
 		print("You see a bright, red ball one of the animals would love.")
@@ -79,7 +79,7 @@ class Rooms():
 		self.specialty_item_room() 
 
 	def grocery_room(self):
-		self.specialty_room == "grocery_room"
+		self.specialty_room = "grocery_room"
 
 		print("Welcome to the Grocery Store!")
 		print("You see a bag of bird seed one of the animals would love.")
@@ -88,38 +88,34 @@ class Rooms():
 
 	def grooming_room(self):
 		
-		self.specialty_room == "grooming_room"
+		self.specialty_room = "grooming_room"
 		
 		print("Welcome to the Groooming Store!")
 		print("You see a small, brush one of the animals would really enjoy.")
 
 		self.specialty_item_room() 
-
-	def available_specialty_item(self, inventory):
-		print("You have the following specialty items: ")
-
-		if len(self.inventory) == None:
-			print("You do not have any specialty items yet.")
-		else:
-			print("0: Save items for later.")
-
-			if self.inventory == "Red Ball":
-				print("1: Red Ball")
-			if self.inventory == "Bird Seed":
-				print("2: Bird Seed")
-			if self.inventory == "Small Brush":
-				print("3: Small Brush")
-
+		
+		
 
 	def use_specialty_item(self):
 		while True:
-			menu_selection = self.get_menu_selection(self.available_specialty_item())
+			print("You have the following specialty items: ")
 
-			if menu_selection == "0":
+			if len(self.inventory) == 0:
+				print("You do not have any specialty items yet.")
+				print("0: to go back.")
+			else:
+				print("0: Save items for later.")
+				for inventory_item in self.inventory:
+					print(inventory_item)
+
+			use = input("\n What would you like to use? \n  >  ")
+
+			if use == "0":
 				print("Your special items will be saved for use in different rooms.")
 				break
 		
-			elif menu_selection == "1":
+			elif use == "1":
 				if self.animal_room == "golden_retriever_room":
 					print("The ball was a great idea for the golden retriever.")
 					print("Great job!  The puppy really loved playing with you")
@@ -135,7 +131,7 @@ class Rooms():
 					print("The ball bounces and smushes the poor bunny.")
 					leave()
 		
-			elif menu_selection == "2":
+			elif use == "2":
 				if self.animal_room == "peacock_room":
 					print("Great Job! The peacock was very hungry.")
 					print("You watch as the peacock spreads his feathers wide.")
@@ -152,7 +148,7 @@ class Rooms():
 					print("The bunny is even more of a mess.")
 					leave()
 		
-			elif menu_selection == "3":
+			elif use == "3":
 				if self.animal_room == "bunny_room":
 					print("That bunny sure was a mess.")
 					print("Great job! You brushed the bunny.")
