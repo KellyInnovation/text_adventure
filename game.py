@@ -9,41 +9,7 @@ class GamePlay():
 	def leave(self):
 		print("The animals are sad.  Please leave Pet Place.")
 		exit(0)
-
-
-	def winning(self):
-		
-		print("Congratulations!  You won the game.")
-		print("All of the animals are so happy!")
-		print("""
-		**********************************************************************
-
-										   ______
-				                    ~——----  ___ --———-~
-						          /	   ~——---   ---—~    \
-						        /	 /    ~—------~    \   \
-						      /	   /    /   ~---~   \    \   \
-						    /	 /    /   /       \   \    \   \
-						   |    |  	 |   |         |   |    |   |
-						   |    |    |   |         |   |    |   |
-						   |    |    |   |         |   |    |   |
-
-
-
-						   /\      /\
-				          /  \    /  \
-				         |    |  |    |
-				          \   /___\   /
-				          /           \
-				         |    O   O   |
-				          \     ?    /             
-				            \   ~   /   ____——_____
-				              |     \__/            \
-				                 /                        \
-			                |			          	   |O
-			                |__________________________|   
-
-		""")
+	
 
 	def get_menu_selection(self, menu_items):
 		print("\n")

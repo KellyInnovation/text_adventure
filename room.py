@@ -1,4 +1,6 @@
+from sys import exit
 import random
+import math
 
 from game import GamePlay
 
@@ -58,7 +60,14 @@ class Rooms():
 		answer = x + y
 		print("%d + %d" % (x, y))
 
-		player_answer = int(input("What is the answer? \n > "))
+		player_answer = input("What is the answer? \n > ")
+
+		try:
+			player_answer = int(player_answer)
+		except ValueError:
+			print("Please enter a numerical answer.")
+			self.earn_item()
+
 
 		if player_answer == answer:
 			print("Great job!")
@@ -90,7 +99,7 @@ class Rooms():
 			elif menu_selection == "1":	
 				self.earn_item()
 			else: 
-				display_selection_error(menu_selection)
+				self.games.display_selection_error(menu_selection)
 	
 	def toy_room(self):
 		self.specialty_room = "toy_room"
@@ -134,13 +143,17 @@ class Rooms():
 			use = input("\n What would you like to use? \n  >  ")
 
 			if use == "0":
-				print("Your special items will be saved for use in different rooms.")
+				print("Your special items will be saved for use in different rooms.\n")
 				break
 		
+			#elif use.lower() != "red ball" or "bird seed" or "small brush":
+				#print("Please type the name of an item in your inventory.\n")
+				#self.use_specialty_item()
+
 			elif use.lower() == "red ball":
 				if self.animal_room == "golden_retriever_room":
-					print("The ball was a great idea for the golden retriever.\n\n")
-					print("Great job!  The puppy really loved playing with you")
+					print("The ball was a great idea for the golden retriever.")
+					print("Great job!  The puppy really loved playing with you\n\n")
 					self.happy_animal.append("Golden Retriever")
 					self.inventory.remove("Red Ball")
 					self.animal_room = None
@@ -189,7 +202,8 @@ class Rooms():
 					self.games.leave()
 
 			else:
-				display_selection_error(menu_selection)
+				print("Please select enter the name of an item in your inventory.")
+				self.use_specialty_item()
 
 	def animal_room_choice(self):
 		print("What would you like to do?")
@@ -201,7 +215,7 @@ class Rooms():
 			elif menu_selection == "1":	
 				self.use_specialty_item()
 			else: 
-				display_selection_error(menu_selection)
+				self.games.display_selection_error(menu_selection)
 
 	def golden_retriever_room(self):
 		self.animal_room = "golden_retriever_room"
@@ -251,50 +265,48 @@ class Rooms():
 			elif menu_selection == "6":
 				self.bunny_room()
 			else: 
-				self.display_selection_error(menu_selection)
+				self.games.display_selection_error(menu_selection)
 
 	def winner(self):
 		if self.happy_animal == ["Golden Retriever", "Peacock", "Bunny"]:
 			print("Congratulations!  You won the game.")
 			print("All of the animals are so happy!")
-			print("""
+			print("""\
 **********************************************************************
 
-					   ______
-				~------  ___ ------~
-			   /   ~-----	-----~   \
-			  /   /   ~-------~   \   \
-			 /   /   /   ~-~   \   \   \
-			/   /   /   /   \   \   \   \
-		   |   |   |   |     |   |   |   |
 
+				      
+                  aaiittllttiiaa
+              k a i t llyyll t i a k
+            k a i t l yynnyy l t i a k					  
+          k a i t l y nn  nn y l t i a k						
+        k a i t l y n        n y l t i a k  
+       k a i t l y n          n y l t i a k 
+      k a i t l y n            n y l t i a k
 
-					   ______
-                ~——----  ___ --———-~
-	          /	   ~——---   ---—~    \
-	        /	 /    ~—------~    \   \
-	      /	   /    /   ~---~   \    \   \
-	    /	 /    /   /       \   \    \   \
-	   |    |  	 |   |         |   |    |   |
-	   |    |    |   |         |   |    |   |
-	   |    |    |   |         |   |    |   |
+                          .".
+                         /  |
+                        /  /
+                       / ,"
+           .-------.--- /
+          "._ __.-/ o. o\  
+             "   (    Y  )
+                  )     /
+                 /     (
+                /       Y
+            .-"         |
+           /  _     \    \ 
+          /    `. ". ) /' )
+         Y       )( / /(,/
+        ,|      /     )
+       ( |     /     /
+        " \_  (__   (__        
+            "-._,)--._,)
 
-
-
-	   /\      /\
-      /  \    /  \
-     |    |  |    |
-      \   /___\   /
-      /           \
-     |    O   O   |
-      \     ?    /             
-        \   ~   /   ____——_____
-          |     \__/            \
-         /                        \
-        |			          	   |O
-        |__________________________|   
-
+*********************************************************************
 			""")
+
+			exit(0)
 		else:
 			self.lobby()
 
