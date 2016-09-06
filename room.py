@@ -1,7 +1,8 @@
 import random
 
+
 #import game
-from game import get_menu_selection, display_selection_error
+
 
 class Rooms():
 	"""docstring for Rooms"""
@@ -31,29 +32,27 @@ class Rooms():
 		self.animal_room = None
 		self.happy_animal = []
 
-
 	def earn_item(self):
 		print("In order to buy the specialty item, the store needs you to solve the following problem: ")
 		x = random.randrange(1,10)
 		y = random.randrange(1,10)
 		answer = x + y
-		print("%s + %s", % (x, y))
+		print("%d + %d" % (x, y))
 
 		player_answer = int(input("What is the answer? \n > "))
 
 		if player_answer == answer:
 			print("Great job!")
-				if self.specialty_room == "toy_room":
-					print("You earned a Red Ball!")
-					self.inventory.append("Red Ball")
-				elif self.specialty_room == "grocery_room":
-					print("You earned Bird Seed!")
-					self.inventory.append("Bird Seed")
-				elif self.specialty_room == "grooming_room":
-					print("You earned a Small Brush")
-					self.inventory.append("Small Brush")
+			if self.specialty_room == "toy_room":
+				print("You earned a Red Ball!")
+				self.inventory.append("Red Ball")
+			elif self.specialty_room == "grocery_room":
+				print("You earned Bird Seed!")
+				self.inventory.append("Bird Seed")
+			elif self.specialty_room == "grooming_room":
+				print("You earned a Small Brush")
+				self.inventory.append("Small Brush")
 			self.specialty_room = None
-			break
 		else:
 			print("Try again.")
 			self.earn_item()
@@ -62,7 +61,7 @@ class Rooms():
 	def specialty_item_room(self):
 		print("What would you like to do?")
 		while True:
-			menu_selection = get_menu_selection(rooms.SPECIALTY_ROOM_MENU)
+			menu_selection = self.get_menu_selection(self.SPECIALTY_ROOM_MENU)
 
 			if menu_selection == "0":
 				break
@@ -72,36 +71,35 @@ class Rooms():
 				display_selection_error(menu_selection)
 	
 	def toy_room(self):
-		self.specialty_room = "toy_room"
+		self.specialty_room == "toy_room"
 
 		print("Welcome to the Toy Store!")
 		print("You see a bright, red ball one of the animals would love.")
 
-		self.specialty_room(toy_room) 
+		self.specialty_item_room() 
 
 	def grocery_room(self):
-		self.specialty_room = "grocery_room"
+		self.specialty_room == "grocery_room"
 
 		print("Welcome to the Grocery Store!")
 		print("You see a bag of bird seed one of the animals would love.")
 
-		self.specialty_item_room(grocery_room) 
+		self.specialty_item_room() 
 
 	def grooming_room(self):
 		
-		self.specialty_room = "grooming_room"
+		self.specialty_room == "grooming_room"
 		
 		print("Welcome to the Groooming Store!")
 		print("You see a small, brush one of the animals would really enjoy.")
 
-		self.specialty_item_room(grooming_room) 
+		self.specialty_item_room() 
 
 	def available_specialty_item(self, inventory):
 		print("You have the following specialty items: ")
 
-		if len(self.inventory) == 0:
+		if len(self.inventory) == None:
 			print("You do not have any specialty items yet.")
-			break
 		else:
 			print("0: Save items for later.")
 
@@ -113,9 +111,9 @@ class Rooms():
 				print("3: Small Brush")
 
 
-	def choose_specialty_item(self):
+	def use_specialty_item(self):
 		while True:
-			menu_selection = get_menu_selection(self.available_specialty_item())
+			menu_selection = self.get_menu_selection(self.available_specialty_item())
 
 			if menu_selection == "0":
 				print("Your special items will be saved for use in different rooms.")
@@ -125,7 +123,7 @@ class Rooms():
 				if self.animal_room == "golden_retriever_room":
 					print("The ball was a great idea for the golden retriever.")
 					print("Great job!  The puppy really loved playing with you")
-					self.happy_animal.append("Golden Retriever")
+					game.happy_animal.append("Golden Retriever")
 					self.inventory.remove("Red Ball")
 					self.animal_room = None
 					break
@@ -178,7 +176,7 @@ class Rooms():
 	def animal_room_choice(self):
 		print("What would you like to do?")
 		while True:
-			menu_selection = get_menu_selection(rooms.ANIMAL_ROOM_MENU)
+			menu_selection = self.get_menu_selection(self.ANIMAL_ROOM_MENU)
 
 			if menu_selection == "0":
 				break
@@ -194,7 +192,7 @@ class Rooms():
 		print("Inside this room is a golden retriever, with soft, golden fur.")
 		print("This playful puppy is so excited to see you.")
 
-		self.animal_room_choice(golden_retriever_room)
+		self.animal_room_choice()
 
 	def peacock_room(self):
 		self.animal_room = "peacock_room"
@@ -202,7 +200,7 @@ class Rooms():
 		print("Inside, there is a beautiful peacock fanning its tail feathers.")
 		print("He is pecking the ground with his azure, blue head.")
 
-		self.animal_room_choice(peacock_room)
+		self.animal_room_choice()
 
 	def bunny_room(self):
 		self.animal_room = "bunny_room"
@@ -210,7 +208,7 @@ class Rooms():
 		print("As soon as you walk in, a fluffy bunny hops over to see you.")
 		print("The bunny looks cute, but a little messy.")
 
-		self.animal_room_choice(bunny_room)
+		self.animal_room_choice()
 
 	def lobby(self):
 		print("There are six doors in the lobby.")
@@ -218,7 +216,7 @@ class Rooms():
 		print("Which door do you open?")
 
 		while True:
-			menu_selection = get_menu_selection(rooms.ROOM_DOOR_MENU)
+			menu_selection = self.get_menu_selection(self.ROOM_DOOR_MENU)
 
 			if menu_selection == "0":
 				break
@@ -235,4 +233,19 @@ class Rooms():
 			elif menu_selection == "6":
 				self.bunny_room()
 			else: 
-				display_selection_error(menu_selection)
+				self.display_selection_error(menu_selection)
+
+	def get_menu_selection(self, menu_items):
+		print("\n")
+		for menu_item in menu_items:
+			print(menu_item)
+
+		return input("\nPlease select an option from above. \n  >  ")
+
+	def display_selection_error(self, menu_selection):
+		if menu_selection.isdigit():
+			print("\n{} is an invalid option, please try again"
+				.format(menu_selection))
+		else:
+			print("\n{} is not a number.  Please select from the options above."
+				.format(menu_selection))
