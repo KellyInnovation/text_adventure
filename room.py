@@ -1,8 +1,6 @@
 import random
 
-
-#import game
-
+from game import GamePlay
 
 class Rooms():
 	"""docstring for Rooms"""
@@ -30,7 +28,28 @@ class Rooms():
 		self.inventory = []
 		self.specialty_room = None
 		self.animal_room = None
+		self.games = GamePlay()
 		self.happy_animal = []
+
+	def start(self):
+		print("Welcome to Pet Place")
+		print("You are in the lobby of Pet Place.")
+		print("The room is bright, with black and white tiles checkered on the floor.")
+		print("Pictures of animals line the walls.")
+		print("You hear animals behind closed doors.")
+		print("Will you help the owner take care of the animals? Yes, or No?")
+		
+		help_pets = input(">  ")
+
+		if help_pets.lower() == "yes":
+			print("Great, let's get started!")
+			self.lobby()
+		elif help_pets.lower() == "no":
+			print("You didn't even try.")
+			self.self.games.leave()
+		else:
+			print("Yes or No?")
+			self.start()	
 
 	def earn_item(self):
 		print("In order to buy the specialty item, the store needs you to solve the following problem: ")
@@ -46,12 +65,15 @@ class Rooms():
 			if self.specialty_room == "toy_room":
 				print("You earned a Red Ball!")
 				self.inventory.append("Red Ball")
+				self.lobby()
 			elif self.specialty_room == "grocery_room":
 				print("You earned Bird Seed!")
 				self.inventory.append("Bird Seed")
+				self.lobby()
 			elif self.specialty_room == "grooming_room":
 				print("You earned a Small Brush")
 				self.inventory.append("Small Brush")
+				self.lobby()
 			self.specialty_room = None
 		else:
 			print("Try again.")
@@ -61,7 +83,7 @@ class Rooms():
 	def specialty_item_room(self):
 		print("What would you like to do?")
 		while True:
-			menu_selection = self.get_menu_selection(self.SPECIALTY_ROOM_MENU)
+			menu_selection = self.games.get_menu_selection(self.SPECIALTY_ROOM_MENU)
 
 			if menu_selection == "0":
 				break
@@ -99,6 +121,7 @@ class Rooms():
 	def use_specialty_item(self):
 		while True:
 			print("You have the following specialty items: ")
+			print("Type which item you would like to use.")
 
 			if len(self.inventory) == 0:
 				print("You do not have any specialty items yet.")
@@ -116,54 +139,54 @@ class Rooms():
 		
 			elif use.lower() == "red ball":
 				if self.animal_room == "golden_retriever_room":
-					print("The ball was a great idea for the golden retriever.")
+					print("The ball was a great idea for the golden retriever.\n\n")
 					print("Great job!  The puppy really loved playing with you")
 					self.happy_animal.append("Golden Retriever")
 					self.inventory.remove("Red Ball")
 					self.animal_room = None
-					break
+					self.winner()
 				elif self.animal_room == "peacock_room":
 					print("The peacock gets angry and pops the ball.")
 					print("He really wanted food.")
-					leave()
+					self.games.leave()
 				elif self.animal_room == "bunny_room":
 					print("The ball bounces and smushes the poor bunny.")
-					leave()
+					self.games.leave()
 		
 			elif use.lower() == "bird seed":
 				if self.animal_room == "peacock_room":
 					print("Great Job! The peacock was very hungry.")
-					print("You watch as the peacock spreads his feathers wide.")
+					print("You watch as the peacock spreads his feathers wide.\n\n")
 					self.happy_animal.append("Peacock")
 					self.inventory.remove("Bird Seed")
 					self.animal_room = None
-					break
+					self.winner()
 				elif self.animal_room == "golden_retriever_room":
 					print("The golden retriever breathes in the bird seed.")
 					print("She can't stop sneezing.")
-					leave()
+					self.games.leave()
 				elif self.animal_room == "bunny_room":
 					print("The bunny thinks the seed is litter.")
 					print("The bunny is even more of a mess.")
-					leave()
+					self.games.leave()
 		
 			elif use.lower() == "small brush":
 				if self.animal_room == "bunny_room":
 					print("That bunny sure was a mess.")
 					print("Great job! You brushed the bunny.")
-					print("The bunny sniffs you and likes the petting.")
+					print("The bunny sniffs you and likes the petting.\n\n")
 					self.happy_animal.append("Bunny")
 					self.inventory.remove("Small Brush")
 					self.animal_room = None
-					break
+					self.winner()
 				elif self.animal_room == "golden_retriever_room":
 					print("The golden retriever eats the brush.")
 					print("She doesn't feel very good.")
-					leave()
+					self.games.leave()
 				elif self.animal_room == "peacock_room":
 					print("You pulled out one of his feathers!")
 					print("The peacock is mad and squawking!")
-					leave()
+					self.games.leave()
 
 			else:
 				display_selection_error(menu_selection)
@@ -171,7 +194,7 @@ class Rooms():
 	def animal_room_choice(self):
 		print("What would you like to do?")
 		while True:
-			menu_selection = self.get_menu_selection(self.ANIMAL_ROOM_MENU)
+			menu_selection = self.games.get_menu_selection(self.ANIMAL_ROOM_MENU)
 
 			if menu_selection == "0":
 				break
@@ -206,15 +229,15 @@ class Rooms():
 		self.animal_room_choice()
 
 	def lobby(self):
-		print("There are six doors in the lobby.")
+		print("\nThere are six doors in the lobby.")
 		print("\n")
 		print("Which door do you open?")
 
 		while True:
-			menu_selection = self.get_menu_selection(self.ROOM_DOOR_MENU)
+			menu_selection = self.games.get_menu_selection(self.ROOM_DOOR_MENU)
 
 			if menu_selection == "0":
-				break
+				self.games.leave()
 			elif menu_selection == "1":
 				self.toy_room()
 			elif menu_selection == "2":
@@ -230,17 +253,49 @@ class Rooms():
 			else: 
 				self.display_selection_error(menu_selection)
 
-	def get_menu_selection(self, menu_items):
-		print("\n")
-		for menu_item in menu_items:
-			print(menu_item)
+	def winner(self):
+		if self.happy_animal == ["Golden Retriever", "Peacock", "Bunny"]:
+			print("Congratulations!  You won the game.")
+			print("All of the animals are so happy!")
+			print("""
+**********************************************************************
 
-		return input("\nPlease select an option from above. \n  >  ")
+					   ______
+				~------  ___ ------~
+			   /   ~-----	-----~   \
+			  /   /   ~-------~   \   \
+			 /   /   /   ~-~   \   \   \
+			/   /   /   /   \   \   \   \
+		   |   |   |   |     |   |   |   |
 
-	def display_selection_error(self, menu_selection):
-		if menu_selection.isdigit():
-			print("\n{} is an invalid option, please try again"
-				.format(menu_selection))
+
+					   ______
+                ~——----  ___ --———-~
+	          /	   ~——---   ---—~    \
+	        /	 /    ~—------~    \   \
+	      /	   /    /   ~---~   \    \   \
+	    /	 /    /   /       \   \    \   \
+	   |    |  	 |   |         |   |    |   |
+	   |    |    |   |         |   |    |   |
+	   |    |    |   |         |   |    |   |
+
+
+
+	   /\      /\
+      /  \    /  \
+     |    |  |    |
+      \   /___\   /
+      /           \
+     |    O   O   |
+      \     ?    /             
+        \   ~   /   ____——_____
+          |     \__/            \
+         /                        \
+        |			          	   |O
+        |__________________________|   
+
+			""")
 		else:
-			print("\n{} is not a number.  Please select from the options above."
-				.format(menu_selection))
+			self.lobby()
+
+

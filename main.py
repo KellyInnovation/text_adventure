@@ -1,10 +1,9 @@
 import game
-from game import GamePlay
+from room import Rooms
 
 def main():
-	game_play = GamePlay()
-
-	game_play.start()
+	rooms = Rooms()
+	rooms.start()
 
 
 if __name__ == '__main__':
