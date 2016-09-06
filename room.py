@@ -95,7 +95,6 @@ class Rooms():
 
 		self.specialty_item_room() 
 		
-		
 
 	def use_specialty_item(self):
 		while True:
@@ -115,11 +114,11 @@ class Rooms():
 				print("Your special items will be saved for use in different rooms.")
 				break
 		
-			elif use == "1":
+			elif use.lower() == "red ball":
 				if self.animal_room == "golden_retriever_room":
 					print("The ball was a great idea for the golden retriever.")
 					print("Great job!  The puppy really loved playing with you")
-					game.happy_animal.append("Golden Retriever")
+					self.happy_animal.append("Golden Retriever")
 					self.inventory.remove("Red Ball")
 					self.animal_room = None
 					break
@@ -131,7 +130,7 @@ class Rooms():
 					print("The ball bounces and smushes the poor bunny.")
 					leave()
 		
-			elif use == "2":
+			elif use.lower() == "bird seed":
 				if self.animal_room == "peacock_room":
 					print("Great Job! The peacock was very hungry.")
 					print("You watch as the peacock spreads his feathers wide.")
@@ -148,7 +147,7 @@ class Rooms():
 					print("The bunny is even more of a mess.")
 					leave()
 		
-			elif use == "3":
+			elif use.lower() == "small brush":
 				if self.animal_room == "bunny_room":
 					print("That bunny sure was a mess.")
 					print("Great job! You brushed the bunny.")

@@ -7,7 +7,6 @@ from room import Rooms
 class GamePlay():
 	"""docstring for Game"""
 	def __init__(self):
-		self.happy_animal = []
 		self.rooms = Rooms()
 
 	def leave(self):
