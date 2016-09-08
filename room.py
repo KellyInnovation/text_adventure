@@ -48,7 +48,7 @@ class Rooms():
 			self.lobby()
 		elif help_pets.lower() == "no":
 			print("You didn't even try.")
-			self.self.games.leave()
+			self.games.leave()
 		else:
 			print("Yes or No?")
 			self.start()	
